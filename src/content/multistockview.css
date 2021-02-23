@@ -1,0 +1,24 @@
+.multistockview .stock > .chart {
+  margin-top: -60px;
+  width: 900px;
+  height: 375px;
+  padding-left: 45px;
+  padding-bottom: 40px;
+}
+
+@media screen and (max-width: 1080px) {
+  .multistockview .stock > .chart {
+    margin-top: -50px;
+    padding-left: 90px;
+  }
+}
+
+.multistockview .stock > .chart > .inner {
+  height: 100%;
+}
+
+.multistockview .stock.minimized > .chart {
+  margin-top: 0;
+  padding-left: 50px;
+  height: auto;
+}

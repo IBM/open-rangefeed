@@ -1,0 +1,28 @@
+@import '../node_modules/@ibm/plex/css/ibm-plex.css';
+
+html, body {
+  height: 100%;
+  overflow: scroll;
+}
+
+body {
+  background-color: #1A2830;
+  font-size: 30px;
+  color: #fff;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 300;
+}
+
+#root {
+  height: 1080px;
+  border: 1px solid #434343;
+  overflow: hidden;
+  position: relative;
+}
+
+@media screen and (max-width: 1080px) {
+  #root {
+    width: 100%;
+    height: 100%;
+  }
+}

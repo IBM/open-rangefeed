@@ -1,0 +1,113 @@
+.content-tweetview .tweet-list {
+  position: relative;
+  width: 350px;
+  height: 100%;
+  padding-top: 0px !important; 
+}
+
+.content-tweetview .tweet-list > .title {
+  font-size: 13px;
+  font-weight: 200;
+  position: fixed;
+  width: 350px;
+  z-index: 100;
+  top: 0;
+  background-color: #1A2830;
+  border-bottom: 1px solid #434343;
+  text-align: center;
+  display: flex;
+}
+
+.tweet-list > .title > .button-container {
+  width: 25%;
+  text-align: right;
+}
+.tweet-list > .title > .button-container > .view-button{
+  font-size: 7pt;
+  background-color: transparent;
+  border: 1px solid grey;
+  color: grey;
+  border-radius: 12%;
+  border-top: none;
+}
+.tweet-list > .title > .button-container > .view-button:hover{
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+  border-top: none;
+}
+.tweet-list > .title > .button-container > .view-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.content-tweetview .tweet-list > .title > .sentiment-value {
+  font-weight: 400;
+  font-size: 11px;
+  margin-left: 10px;
+}
+
+.content-tweetview .tweet-list > .tweet-container {
+  margin-top: 35px;
+  position: relative;
+  height: 100%;
+  text-align: left;
+}
+
+/*** SPLIT VIEW ***/
+
+.content .tweet-list {
+  position: relative;
+  padding-left: 50px;
+  width: 790px;
+  height: 100%;
+  padding-top: 0px !important;
+}
+
+@media screen and (max-width: 1080px) {
+  .content .tweet-list {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 5px !important;
+    width: 100%;
+    height: auto;
+    flex: 1;
+    overflow: hidden;
+  }
+}
+
+.content .tweet-list > .title {
+  font-size: 32px;
+  font-weight: 200;
+  position: fixed;
+  width: 850px;
+  z-index: 100;
+  top: 0;
+  background-color: #1A2830;
+  border-bottom: 1px solid #434343;
+  text-align: center;
+  padding: 20px;
+  display: flex;
+}
+
+@media screen and (max-width: 1080px) {
+  .content .tweet-list > .title {
+    left: 50%;
+    margin-left: -425px;
+    top: auto;
+    display: flex;
+  }
+}
+
+.content .tweet-list > .title > .sentiment-value {
+  font-weight: 400;
+  font-size: 36px;
+  margin-left: 10px;
+}
+
+.content .tweet-list > .tweet-container {
+  margin-top: 107px;
+  position: relative;
+  height: 100%;
+}
+

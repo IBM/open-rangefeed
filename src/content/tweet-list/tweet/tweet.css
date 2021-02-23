@@ -1,0 +1,249 @@
+
+.content-tweetview .tweet {
+  width: 350px;
+  padding: 5px 10px 0 10px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  transition: transform 0.5s;
+  background-color: #1A2830;
+  border-bottom: 1px solid #434343;
+}
+
+.content .tweet {
+  width: 850px;
+  padding: 5px 10px 0 10px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  transition: transform 0.5s;
+  background-color: #1A2830;
+  border-bottom: 1px solid #434343;
+}
+
+.sticky-tweet .tweet {
+  padding: 15px 10px;
+}
+
+.sticky-tweet .tweet > .face {
+  margin-top: 7px;
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 1080px) {
+  .content .tweet {
+    width: 100%;
+  }
+}
+
+.tweet.hidden {
+  display: none;
+}
+
+.content-tweetview .tweet.negative > .right > .text {
+  min-height: 70px;
+}
+
+.content-tweetview .tweet.has-img > .right > .text {
+  min-height: auto !important;
+}
+
+.content-tweetview .tweet > .symbol {
+  display: none;
+  background-color: #ff3232;
+  width: 20px;
+  height: 20px;
+  border-radius: 200px;
+  position: absolute;
+  bottom: 18px;
+  right: 10px;
+  margin-top: -20px;
+  text-align: center;
+  padding-top: 5px;
+  font-size: 50px;
+  font-weight: bold;
+  color: transparent;
+  transform: scale(0.7);
+  animation: glow 2s infinite;
+}
+
+.tweet.negative > .symbol {
+  display: block;
+}
+
+@keyframes glow {
+  /*
+  0%   { box-shadow: 0px 0px 0px 0px rgba(232,9,9,0); }
+  50% { box-shadow: 0px 0px 100px 0px rgba(232,9,9,1); }
+  100% { box-shadow: 0px 0px 100px 0px rgba(232,9,9,0); }
+  */
+  0%   { opacity: 0 }
+  100% { opacity: 1 }
+}
+
+.content-tweetview .tweet > .face {
+  border-radius: 60px;
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  display: flex;
+  align-self: flex-start;
+  margin-top: 20px;
+}
+
+.content-tweetview .tweet > .right {
+  flex: 1;
+  min-height: 85px;
+  text-align: left;
+}
+
+.tweet > .right > .name.hidden {
+  display: none;
+}
+
+.content-tweetview .tweet > .right > .name {
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-left: 10px;
+  margin-top: 15px;
+}
+
+.content-tweetview .tweet > .right > .name > .icon-verified {
+  width: 15px;
+  height: 15px;
+  margin-left: 5px;
+}
+
+.content-tweetview .tweet > .right > .text {
+  flex: 1;
+  padding: 10px;
+  padding-top: 15px;
+  font-size: 12pt;
+}
+
+.tweet > .right.has-name > .text {
+  padding-top: 5px;
+}
+
+.content-tweetview .tweet > .right > .img {
+  max-width: 230px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.tweet > .right > .icons {
+  display: flex;
+  margin-top:10px;
+}
+
+.content-tweetview .tweet > .right > .icons > .icon-wrapper {
+  width: 70px;
+  height: 38px;
+  margin-left: 15px;
+  display: flex;
+}
+
+.content-tweetview .tweet > .right > .icons > .icon-wrapper > img.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+.content-tweetview .tweet > .right > .icons > .icon-wrapper .count {
+  font-size: 10pt;
+}
+
+/*** SPLIT VIEW ***/
+
+.content .tweet.negative > .right > .text {
+  min-height: 100px;
+}
+
+.content .tweet.has-img > .right > .text {
+  min-height: auto !important;
+}
+
+.content .tweet > .symbol {
+  display: none;
+  background-color: #ff3232;
+  width: 40px;
+  height: 40px;
+  border-radius: 200px;
+  position: absolute;
+  bottom: 18px;
+  right: 10px;
+  margin-top: -20px;
+  text-align: center;
+  padding-top: 5px;
+  font-size: 50px;
+  font-weight: bold;
+  color: transparent;
+  transform: scale(0.7);
+  animation: glow 2s infinite;
+}
+
+.content .tweet > .face {
+  border-radius: 60px;
+  width: 120px;
+  height: 120px;
+  margin-left: 10px;
+  display: flex;
+  align-self: flex-start;
+  margin-top: 20px;
+}
+
+.content .tweet > .right {
+  flex: 1;
+  min-height: 160px;
+}
+
+.content .tweet > .right > .name {
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-left: 30px;
+}
+
+.content .tweet > .right > .name > .icon-verified {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.content .tweet > .right > .text {
+  flex: 1;
+  margin-left: 20px;
+  padding: 10px;
+  padding-top: 15px;
+}
+
+.content .tweet > .right > .img {
+  max-height: 90%;
+  max-height: 270px;
+  margin-left: 25px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.content .tweet > .right > .icons {
+  display: flex;
+  margin-top:10px;
+}
+
+.content .tweet > .right > .icons > .icon-wrapper {
+  width: 120px;
+  height: 60px;
+  margin-left: 90px;
+  display: flex;
+}
+
+.content .tweet > .right > .icons > .icon-wrapper > .icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.content-tweetview .right > .icons > .icon-wrapper > .icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}

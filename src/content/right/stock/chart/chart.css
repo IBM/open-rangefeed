@@ -1,0 +1,48 @@
+.content-stockview > .right > .stock > .chart {
+  width: 375px;
+  height: 325px;
+  padding-bottom: 20px;
+  display: inline-block;
+}
+
+@media screen and (max-height: 350px) {
+  .content-stockview > .right > .stock > .chart {
+    display: none;
+  }
+}
+
+.content-stockview > .right > .stock > .chart > .inner {
+  height: 100%;
+}
+
+.content-stockview > .right > .stock.minimized > .chart {
+  margin-top: 0;
+  padding-left: 50px;
+  height: auto;
+}
+
+/*** SPLIT VIEW ***/
+.content > .right > .stock > .chart {
+  margin-top: 100px;
+  width: 900px;
+  height: 750px;
+  padding-left: 45px;
+  padding-bottom: 40px;
+}
+
+@media screen and (max-width: 1080px) {
+  .content > .right > .stock > .chart {
+    margin-top: -50px;
+    padding-left: 90px;
+  }
+}
+
+.content > .right > .stock > .chart > .inner {
+  height: 100%;
+}
+
+.content > .right > .stock.minimized > .chart {
+  margin-top: 0;
+  padding-left: 50px;
+  height: auto;
+}
