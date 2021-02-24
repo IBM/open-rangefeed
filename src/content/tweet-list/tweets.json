@@ -1,0 +1,26 @@
+{
+  "_id": "tweets",
+  "sets": [
+    {
+      "isDefault": true,
+      "title": "",
+      "positive": [
+        {
+        "text": "Default tweet"
+        }
+      ],
+      "neutral": [
+        {
+          "text": "Default tweet"
+        }
+       
+      ],
+      "negative": [
+        {
+          "text": "Default tweet"
+        }
+      ],
+      "isActive": true
+    }
+  ]
+}
