@@ -1,5 +1,5 @@
 {
-  "name": "rangefeed2",
+  "name": "open-rangefeed",
   "version": "1.3.0",
   "private": true,
   "dependencies": {
