@@ -7,10 +7,9 @@ A stock- and social sentiment simulator required for Cyber Ranges.
 
 If you don't have yarn installed do `$ npm install -g yarn`
 
-3. Populate default content.
-- [Profile Pictures](public/img/faces/legacy) For IBM use, this content can be found [here](https://ibm.ent.box.com/folder/127129180625)
-- [Special Images](public/img/faces/special) For IBM use, this content can be found [here](https://ibm.ent.box.com/folder/127130913759)
-- [Tweets](src/content/tweet-list/tweets.json) For IBM use, this content can be found [here](https://ibm.ent.box.com/file/737140732000)
+3. Populate default content in these folders:
+- [Profile Pictures](public/img/faces/legacy) – Put in images with file names 0.jpeg, 1.jpeg, 2.jpeg... and so on.
+- [Tweets](src/content/tweet-list/tweets.json) – Examples included in file. Add as many messages as you want.
 
 ## How to run locally
 Install CouchDB and create a new database called "rangefeed2". Then run:
