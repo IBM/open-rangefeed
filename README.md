@@ -1,4 +1,4 @@
-# RangeFeed2
+# Open RangeFeed
 A stock- and social sentiment simulator required for Cyber Ranges.
 
 ## Setup
