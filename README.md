@@ -35,7 +35,8 @@ curl -X PUT http://127.0.0.1:5984/_node/_local/_config/chttpd/bind_address -d '"
 ## Content Population
 
 1. Put in profile pictures with file names 0.jpeg, 1.jpeg, 2.jpeg etc. into the [faces folder](public/img/faces/legacy)
-2. Populate tweets in [tweets.json](src/content/tweet-list/tweets.json)
+2. Rename [tweets.example.json](src/content/tweet-list/tweets.example.json) to tweets.json
+3. Fill tweets.json with messages according to your preference
 
 ## Install Dependencies
 ```
