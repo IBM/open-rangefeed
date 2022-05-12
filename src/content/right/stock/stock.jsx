@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Chart from './chart/chart';
-import './stock.css';
+import React from "react";
+import PropTypes from "prop-types";
+import Chart from "./chart/chart";
+import "./stock.css";
 
 /**
  * Represents the stock view on the right
@@ -14,7 +14,7 @@ export default class Stock extends React.Component {
     super();
     this.state = {
       price: 0,
-      diffPercent: 0,
+      diffPercent: 0
     };
     this.oldPrice = 0;
     this.onPriceChange = this.onPriceChange.bind(this);
@@ -33,7 +33,7 @@ export default class Stock extends React.Component {
     // Updates the price + percentage label at the top
     this.setState({
       price: Math.round(newPrice * 100) / 100,
-      diffPercent,
+      diffPercent
     });
   }
 
@@ -52,20 +52,37 @@ export default class Stock extends React.Component {
       stockExchange,
       currency,
       curViewIndex,
+      showTicks
     } = this.props;
-    const percentColorClass = diffPercent < 0 ? 'red' : '';
-    const minimizeChartClass = minimizeChart === true ? 'minimized' : '';
-    const button_style = curViewIndex === 1 ? { display: 'block' } : { display: 'none' };
+    const percentColorClass = diffPercent < 0 ? "red" : "";
+    const minimizeChartClass = minimizeChart === true ? "minimized" : "";
+    const button_style =
+      curViewIndex === 1 ? { display: "block" } : { display: "none" };
     return (
       <>
-        <div style={{ ...wrapperStyle, ...style }} className={`stock ${minimizeChartClass}`}>
+        <div
+          style={{ ...wrapperStyle, ...style }}
+          className={`stock ${minimizeChartClass}`}
+        >
           <div className="button-container" style={button_style}>
-            <button className="view-button" type="submit" onClick={() => { this.props.setView(2); }}>View Social Media</button>
+            <button
+              className="view-button"
+              type="submit"
+              onClick={() => {
+                this.props.setView(2);
+              }}
+            >
+              View Social Media
+            </button>
           </div>
           <div className="title">
             <div className="company-name">
-              <img className="bo-logo" src={`${companyInfo.companyNameImg}`} alt="" />
-              {companyInfo.companyName || ''}
+              <img
+                className="bo-logo"
+                src={`${companyInfo.companyNameImg}`}
+                alt=""
+              />
+              {companyInfo.companyName || ""}
               <span className="subtitle">{stockExchange}</span>
             </div>
             <div className="price">
@@ -73,8 +90,7 @@ export default class Stock extends React.Component {
               {price}
               <span className={`percent ${percentColorClass}`}>
                 &nbsp;
-                {diffPercent}
-                %
+                {diffPercent}%
               </span>
             </div>
           </div>
@@ -85,6 +101,7 @@ export default class Stock extends React.Component {
             stockStartingPrice={stockStartingPrice}
             currency={currency}
             curViewIndex={curViewIndex}
+            showTicks={showTicks}
           />
         </div>
       </>
@@ -102,16 +119,18 @@ Stock.propTypes = {
   currency: PropTypes.string,
   curViewIndex: PropTypes.number,
   setView: PropTypes.func,
+  showTicks: PropTypes.bool
 };
 
 Stock.defaultProps = {
   minimizeChart: false,
   stockModifier: 0,
-  companyInfo: { companyName: '' },
+  companyInfo: { companyName: "" },
   stockStartingPrice: 10,
   style: null,
-  stockExchange: 'NYSE',
-  currency: '$',
+  stockExchange: "NYSE",
+  currency: "$",
   curViewIndex: 1,
-  setView: () => {},
+  showTicks: true,
+  setView: () => {}
 };

@@ -1,4 +1,4 @@
-import TweetsJson from './content/tweet-list/tweets.json';
+import TweetsJson from "./content/tweet-list/tweets.json";
 
 const defaultTweetSet = TweetsJson.sets[0];
 
@@ -8,106 +8,109 @@ export default {
   stockStartingPrice3: { defaultValue: 80 },
   stockStartingPrice4: { defaultValue: 100 },
   hashTag: {
-    defaultValue: '',
+    defaultValue: "",
     // When reading from db make sure there is a hashtag at index 0
-    postProcess: (value) => {
-      if (value) return value.indexOf('#') === 0 ? value : `#${value}`;
-      return '';
+    postProcess: value => {
+      if (value) return value.indexOf("#") === 0 ? value : `#${value}`;
+      return "";
     },
-    quickUpdate: true,
+    quickUpdate: true
   },
   customTweet: {
-    defaultValue: '',
+    defaultValue: "",
     payload: {
-      img: '',
-      userName: '',
-      userImg: '',
-      userVip: false,
-    },
+      img: "",
+      userName: "",
+      userImg: "",
+      userVip: false
+    }
   },
   customerTweet: {
-    defaultValue: '',
+    defaultValue: ""
   },
   stockStartingPrice: {
-    defaultValue: 50,
+    defaultValue: 50
   },
   stockExchange: {
-    defaultValue: 'NYSE',
+    defaultValue: "NYSE"
   },
   currency: {
-    defaultValue: '$',
+    defaultValue: "$"
   },
   companyName: {
-    defaultValue: '',
+    defaultValue: "",
     payload: {
-      img: '',
-      tweet: '',
-    },
+      img: "",
+      tweet: ""
+    }
   },
   sentiment: {
     defaultValue: 55,
-    quickUpdate: true,
+    quickUpdate: true
   },
   stockModifier: {
     defaultValue: 0,
-    quickUpdate: true,
+    quickUpdate: true
   },
   restart: {
-    defaultValue: false,
+    defaultValue: false
   },
   tweets: {
     defaultValue: {
       positive: defaultTweetSet.positive,
       neutral: defaultTweetSet.neutral,
-      negative: defaultTweetSet.negative,
-    },
+      negative: defaultTweetSet.negative
+    }
   },
   curViewIndex: {
-    defaultValue: 1,
+    defaultValue: 1
+  },
+  showTicks: {
+    defaultValue: true
   },
   companyName1: {
-    defaultValue: '',
+    defaultValue: "",
     payload: {
-      img: '',
-      tweet: '',
-    },
+      img: "",
+      tweet: ""
+    }
   },
   companyName2: {
-    defaultValue: '',
+    defaultValue: "",
     payload: {
-      img: '',
-      tweet: '',
-    },
+      img: "",
+      tweet: ""
+    }
   },
   companyName3: {
-    defaultValue: '',
+    defaultValue: "",
     payload: {
-      img: '',
-      tweet: '',
-    },
+      img: "",
+      tweet: ""
+    }
   },
   companyName4: {
-    defaultValue: '',
+    defaultValue: "",
     payload: {
-      img: '',
-      tweet: '',
-    },
+      img: "",
+      tweet: ""
+    }
   },
 
   stockModifier1: {
     defaultValue: 0,
-    quickUpdate: true,
+    quickUpdate: true
   },
   stockModifier2: {
     defaultValue: 0,
-    quickUpdate: true,
+    quickUpdate: true
   },
   stockModifier3: {
     defaultValue: 0,
-    quickUpdate: true,
+    quickUpdate: true
   },
   stockModifier4: {
     defaultValue: 0,
-    quickUpdate: true,
-  },
+    quickUpdate: true
+  }
 };

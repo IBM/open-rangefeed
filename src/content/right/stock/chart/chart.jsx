@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import 'chartjs-plugin-annotation';
-import { Line, defaults } from 'react-chartjs-2';
-import './chart.css';
-import Util from '../../../../util';
+import React from "react";
+import PropTypes from "prop-types";
+import "chartjs-plugin-annotation";
+import { Line, defaults } from "react-chartjs-2";
+import "./chart.css";
+import Util from "../../../../util";
 
 /**
  * Displays a chart, usually represents a stock
@@ -18,7 +18,7 @@ export default class Stock extends React.Component {
     this.initChart = this.initChart.bind(this);
     this.state = {
       data: [],
-      labels: [],
+      labels: []
     };
   }
 
@@ -50,8 +50,14 @@ export default class Stock extends React.Component {
     this.interval = setInterval(() => {
       if (!this.startPrice) return;
 
-      if (this.prevStartPrice !== this.startPrice
-        || !this.prevStartPrice || !minDefault || !maxDefault || !min || !max) {
+      if (
+        this.prevStartPrice !== this.startPrice ||
+        !this.prevStartPrice ||
+        !minDefault ||
+        !maxDefault ||
+        !min ||
+        !max
+      ) {
         setMinMaxDefaults();
         this.prevStartPrice = this.startPrice;
       }
@@ -60,9 +66,9 @@ export default class Stock extends React.Component {
 
       let stockModifier = 1;
       if (this.props.stockModifier > 0) {
-        stockModifier = (this.props.stockModifier / 100) + 1;
+        stockModifier = this.props.stockModifier / 100 + 1;
       } else if (this.props.stockModifier < 0) {
-        stockModifier = 1 - ((this.props.stockModifier / 100) * (-1));
+        stockModifier = 1 - (this.props.stockModifier / 100) * -1;
       }
 
       const randPrice = Util.getRand(min, max);
@@ -73,12 +79,17 @@ export default class Stock extends React.Component {
         labels.shift();
       }
       this.curPrice = newPrice;
-      labels.push(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+      labels.push(
+        new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit"
+        })
+      );
 
       // Update state
       this.setState({
         data,
-        labels,
+        labels
       });
 
       // Let parent component know that price has changed
@@ -112,7 +123,7 @@ export default class Stock extends React.Component {
     const { data, labels } = this.state;
     data.length = 0;
     labels.length = 0;
-    const now = (new Date()).getHours();
+    const now = new Date().getHours();
     let variant = 0;
 
     // Create data + labels for chart
@@ -124,10 +135,13 @@ export default class Stock extends React.Component {
           variant += Util.getRand(-0.3, 0.3);
           const min = this.startPrice * 0.9;
           const max = this.startPrice * 1.1;
-          const price = i === 0 && j === 0 ? this.startPrice : Util.getRand(min, max) + variant;
+          const price =
+            i === 0 && j === 0
+              ? this.startPrice
+              : Util.getRand(min, max) + variant;
           data.push(price);
           let mins = j * 10;
-          if (mins === 0) mins = '00';
+          if (mins === 0) mins = "00";
           const label = `${this.startHour + i}:${mins}`;
           labels.push(label);
         }
@@ -136,7 +150,7 @@ export default class Stock extends React.Component {
 
     this.setState({
       data,
-      labels,
+      labels
     });
   }
 
@@ -144,24 +158,33 @@ export default class Stock extends React.Component {
    * React lifecycle method – Render the component
    */
   render() {
-    const { className, currency, curViewIndex } = this.props;
+    const { className, currency, curViewIndex, showTicks } = this.props;
     const { data, labels } = this.state;
     const legend = { display: false };
 
-    defaults.global.defaultFontFamily = '\'IBM Plex Sans\', \'Helvetica Neue\', Arial, sans-serif';
-    defaults.global.defaultFontSize = '35';
+    defaults.global.defaultFontFamily =
+      "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif";
+    defaults.global.defaultFontSize = "35";
 
     // Configure chart line
     const dataProp = {
       labels,
-      datasets: [{
-        lineTension: 0,
-        borderColor: ((this.curPrice / this.startPrice) < 0.72) ? 'rgb(191, 77, 77)' : 'rgb(50, 200, 132)',
-        backgroundColor: ((this.curPrice / this.startPrice) < 0.72) ? 'rgba(191, 77, 77, 0.5)' : 'rgba(50, 200, 132, 0.5)',
-        borderWidth: '5',
-        pointRadius: 0,
-        data,
-      }],
+      datasets: [
+        {
+          lineTension: 0,
+          borderColor:
+            this.curPrice / this.startPrice < 0.72
+              ? "rgb(191, 77, 77)"
+              : "rgb(50, 200, 132)",
+          backgroundColor:
+            this.curPrice / this.startPrice < 0.72
+              ? "rgba(191, 77, 77, 0.5)"
+              : "rgba(50, 200, 132, 0.5)",
+          borderWidth: "5",
+          pointRadius: 0,
+          data
+        }
+      ]
     };
 
     // Configure chart like axis and other stuff
@@ -169,37 +192,44 @@ export default class Stock extends React.Component {
       animation: false,
       maintainAspectRatio: false,
       scales: {
-        yAxes: [{
-          ticks: {
-            callback: (value) => `${currency} ${value}`,
-            beginAtZero: true,
-            fontSize: curViewIndex === 1 ? 15 : 25,
-          },
-        }],
-        xAxes: [{
-          ticks: {
-            maxTicksLimit: 3,
-            maxRotation: 0,
-            minRotation: 0,
-            fontSize: curViewIndex === 1 ? 15 : 25,
-          },
-        }],
+        yAxes: [
+          {
+            ticks: {
+              callback: value => (showTicks ? `${currency} ${value}` : ``),
+              beginAtZero: true,
+              fontSize: curViewIndex === 1 ? 15 : 25
+            }
+          }
+        ],
+        xAxes: [
+          {
+            ticks: {
+              callback: value => (showTicks ? value : ``),
+              maxTicksLimit: 3,
+              maxRotation: 0,
+              minRotation: 0,
+              fontSize: curViewIndex === 1 ? 15 : 25
+            }
+          }
+        ]
       },
       annotation: {
-        annotations: [{
-          // Draw horizontal line
-          type: 'line',
-          mode: 'horizontal',
-          scaleID: 'y-axis-0',
-          value: this.startPrice,
-          borderColor: 'rgba(150, 150, 150, 0.5)',
-          borderWidth: 4,
-          label: {
-            enabled: false,
-            content: 'Test label',
-          },
-        }],
-      },
+        annotations: [
+          {
+            // Draw horizontal line
+            type: "line",
+            mode: "horizontal",
+            scaleID: "y-axis-0",
+            value: this.startPrice,
+            borderColor: "rgba(150, 150, 150, 0.5)",
+            borderWidth: 4,
+            label: {
+              enabled: false,
+              content: "Test label"
+            }
+          }
+        ]
+      }
     };
 
     return (
@@ -223,13 +253,15 @@ Stock.propTypes = {
   stockStartingPrice: PropTypes.number, // eslint-disable-line
   currency: PropTypes.string,
   curViewIndex: PropTypes.number,
+  showTicks: PropTypes.bool
 };
 
 Stock.defaultProps = {
-  className: 'stock',
+  className: "stock",
   onPriceChange: () => {},
   stockModifier: 0,
   stockStartingPrice: 10,
-  currency: '$',
+  currency: "$",
   curViewIndex: 1,
+  showTicks: true
 };

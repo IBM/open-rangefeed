@@ -1,13 +1,13 @@
 /* eslint-disable no-else-return */
-import React from 'react';
-import PropTypes from 'prop-types';
-import store from 'react-couchdb-store';
-import TweetList from './tweet-list/tweet-list';
-import dbSchema from '../db-schema-main';
-import Right from './right/right';
-import Tweet from './tweet-list/tweet/tweet';
-import './splitview.css';
-import Util from '../util';
+import React from "react";
+import PropTypes from "prop-types";
+import store from "react-couchdb-store";
+import TweetList from "./tweet-list/tweet-list";
+import dbSchema from "../db-schema-main";
+import Right from "./right/right";
+import Tweet from "./tweet-list/tweet/tweet";
+import "./splitview.css";
+import Util from "../util";
 
 /**
  * Global wrapper component for this app
@@ -28,11 +28,16 @@ export default class SplitView extends React.Component {
     this.curTweets = {
       positive: [],
       neutral: [],
-      negative: [],
+      negative: []
     };
 
     // Default states
     this.state = {
+      tweets: {
+        positive: [],
+        neutral: [],
+        negative: []
+      }
     };
 
     // Initialize with database schema
@@ -42,7 +47,7 @@ export default class SplitView extends React.Component {
     storeUtil.createDefaultStates(this.state);
 
     // Reads data from database
-    storeUtil.loadState((newState) => {
+    storeUtil.loadState(newState => {
       this.setState(newState);
 
       if (newState.companyNameTweet && this.curTweets) {
@@ -55,7 +60,7 @@ export default class SplitView extends React.Component {
 
         for (let i = 0; i < negativeTweets.length; i += 1) {
           // Set flag for all negative tweets so they can be marked red later
-          negativeTweets[i].mood = 'negative';
+          negativeTweets[i].mood = "negative";
         }
 
         if (this.state.companyNameTweet) this.replaceCompanyNames();
@@ -77,8 +82,9 @@ export default class SplitView extends React.Component {
         }
 
         if (quickUpdate === true) {
-          if (typeof this.quickUpdate === 'function') this.quickUpdate();
-          if (typeof this.quickUpdateRight === 'function') this.quickUpdateRight();
+          if (typeof this.quickUpdate === "function") this.quickUpdate();
+          if (typeof this.quickUpdateRight === "function")
+            this.quickUpdateRight();
         }
       }
     });
@@ -132,21 +138,26 @@ export default class SplitView extends React.Component {
    */
   replaceCompanyNames(tweetsToParse) {
     const cname = this.state.companyNameTweet;
-    const tweets = tweetsToParse || JSON.parse(JSON.stringify(this.state.tweets));
+    const tweets =
+      tweetsToParse || JSON.parse(JSON.stringify(this.state.tweets));
 
-    const runReplace = (moodTweets) => {
+    const runReplace = moodTweets => {
       for (let j = 0; j < moodTweets.length; j += 1) {
         const mt = moodTweets[j];
-        const companyNameNoWhitespace = Util.replaceAll(cname, ' ', '');
-        mt.text = Util.replaceAll(mt.text, 'COMPANY_NAME_NO_WHITESPACE', companyNameNoWhitespace);
-        mt.text = Util.replaceAll(mt.text, 'COMPANY_NAME', cname);
+        const companyNameNoWhitespace = Util.replaceAll(cname, " ", "");
+        mt.text = Util.replaceAll(
+          mt.text,
+          "COMPANY_NAME_NO_WHITESPACE",
+          companyNameNoWhitespace
+        );
+        mt.text = Util.replaceAll(mt.text, "COMPANY_NAME", cname);
       }
     };
 
     if (tweetsToParse) {
       runReplace(tweetsToParse);
     } else {
-      Object.keys(tweets).forEach((i) => {
+      Object.keys(tweets).forEach(i => {
         runReplace(tweets[i]);
       });
       this.curTweets = tweets;
@@ -158,13 +169,13 @@ export default class SplitView extends React.Component {
    */
   updateTweetListTopPadding(paddingTop) {
     setTimeout(() => {
-      const tweetList = document.getElementsByClassName('tweet-list left')[0];
+      const tweetList = document.getElementsByClassName("tweet-list left")[0];
       if (tweetList) {
-        if (typeof paddingTop === 'undefined') {
+        if (typeof paddingTop === "undefined") {
           const stickyHeight = this.stickyRef.current.scrollHeight;
           tweetList.style.paddingTop = `${stickyHeight}px`;
         } else {
-          tweetList.style.paddingTop = '0px';
+          tweetList.style.paddingTop = "0px";
         }
       }
     }, 100);
@@ -193,7 +204,7 @@ export default class SplitView extends React.Component {
       companyName,
       companyNameImg,
       sentiment,
-      customerTweet,
+      customerTweet
     } = this.state;
 
     const tweetListStyle = {};
@@ -202,12 +213,18 @@ export default class SplitView extends React.Component {
 
     // Restarts the app
     if (restart === true) {
-      store.store.update({
-        _id: 'restart',
-        value: false,
-      }, true).then(() => {
-        window.location.reload();
-      });
+      // store.store
+      //   .update(
+      //     {
+      //       _id: "restart",
+      //       value: false
+      //     },
+      //     true
+      //   )
+      //   .then(() => {
+      //     window.location.reload();
+      //   });
+      window.location.reload();
     }
 
     // If a hashtag is set, split tweet stream into left and right
@@ -220,14 +237,15 @@ export default class SplitView extends React.Component {
 
     // If custom tweet or customer tweet is set, show it
     if (customTweet || customerTweet) {
-      stickyStyle.transform = 'translate3d(0, 390px, 0)';
+      stickyStyle.transform = "translate3d(0, 390px, 0)";
       customTweetUser = {
         name: customTweetUserName,
         img: customTweetUserImg,
-        vip: customTweetUserVip,
+        vip: customTweetUserVip
       };
 
-      if (this.stickyRef && this.stickyRef.current) this.updateTweetListTopPadding();
+      if (this.stickyRef && this.stickyRef.current)
+        this.updateTweetListTopPadding();
       else this.updateTweetListTopPadding(0);
     } else {
       this.updateTweetListTopPadding(0);
@@ -240,7 +258,9 @@ export default class SplitView extends React.Component {
 
         {/* Left side with tweets */}
         <TweetList
-          registerQuickUpdate={(callback) => { this.quickUpdate = callback; }}
+          registerQuickUpdate={callback => {
+            this.quickUpdate = callback;
+          }}
           style={tweetListStyle}
           className="tweet-list left"
           title="Social Media"
@@ -248,15 +268,32 @@ export default class SplitView extends React.Component {
           requestNextTweet={this.onNextTweetRequested}
           curViewIndex={this.props.curViewIndex}
         >
-          <div ref={this.stickyRef} style={stickyStyle} className="sticky-tweet">
-            {
-              customerTweet
-              && <Tweet style={{ position: 'relative', marginBottom: '20px' }} user={{ name: companyName, img: companyNameImg }} sentiment={50} vPos={0}>{customerTweet || ''}</Tweet>
-            }
-            {
-              customTweet
-              && <Tweet style={{ position: 'relative' }} user={customTweetUser} img={customTweetImg} sentiment={customTweetSentiment} vPos={0}>{customTweet || ''}</Tweet>
-            }
+          <div
+            ref={this.stickyRef}
+            style={stickyStyle}
+            className="sticky-tweet"
+          >
+            {customerTweet && (
+              <Tweet
+                style={{ position: "relative", marginBottom: "20px" }}
+                user={{ name: companyName, img: companyNameImg }}
+                sentiment={50}
+                vPos={0}
+              >
+                {customerTweet || ""}
+              </Tweet>
+            )}
+            {customTweet && (
+              <Tweet
+                style={{ position: "relative" }}
+                user={customTweetUser}
+                img={customTweetImg}
+                sentiment={customTweetSentiment}
+                vPos={0}
+              >
+                {customTweet || ""}
+              </Tweet>
+            )}
           </div>
         </TweetList>
 
@@ -268,14 +305,18 @@ export default class SplitView extends React.Component {
           stockExchange={stockExchange}
           currency={currency}
           minimizeChart={minimizeChart}
-          registerQuickUpdate={(callback) => { this.quickUpdateRight = callback; }}
-          registerReset={(callback) => { this.resetRight = callback; }}
+          registerQuickUpdate={callback => {
+            this.quickUpdateRight = callback;
+          }}
+          registerReset={callback => {
+            this.resetRight = callback;
+          }}
           hashTag={hashTag}
           requestNextTweet={this.onNextTweetRequested}
           sentiment={sentiment}
           curViewIndex={this.props.curViewIndex}
+          showTicks={this.props.showTicks}
         />
-
       </div>
     );
   }
@@ -284,8 +325,10 @@ export default class SplitView extends React.Component {
 SplitView.propTypes = {
   style: PropTypes.object,
   curViewIndex: PropTypes.number.isRequired,
+  showTicks: PropTypes.bool
 };
 
 SplitView.defaultProps = {
   style: {},
+  showTicks: true
 };

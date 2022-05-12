@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import store from 'react-couchdb-store';
-import Right from './right/right';
-import './stockview.css';
+import React from "react";
+import PropTypes from "prop-types";
+import store from "react-couchdb-store";
+import Right from "./right/right";
+import "./stockview.css";
 
 /**
  * Global wrapper component for this app
@@ -24,15 +24,14 @@ export default class StockView extends React.Component {
     this.curTweets = {
       positive: [],
       neutral: [],
-      negative: [],
+      negative: []
     };
 
     // Default states
-    this.state = {
-    };
+    this.state = {};
 
     // Reads data from database
-    storeUtil.loadState((newState) => {
+    storeUtil.loadState(newState => {
       this.setState(newState);
       this.initializing = false;
     });
@@ -43,8 +42,9 @@ export default class StockView extends React.Component {
         this.setState(newState);
 
         if (quickUpdate === true) {
-          if (typeof this.quickUpdate === 'function') this.quickUpdate();
-          if (typeof this.quickUpdateRight === 'function') this.quickUpdateRight();
+          if (typeof this.quickUpdate === "function") this.quickUpdate();
+          if (typeof this.quickUpdateRight === "function")
+            this.quickUpdateRight();
         }
       }
     });
@@ -73,19 +73,25 @@ export default class StockView extends React.Component {
       restart,
       companyName,
       companyNameImg,
-      sentiment,
+      sentiment
     } = this.state;
 
     let minimizeChart = false;
 
     // Restarts the app
     if (restart === true) {
-      store.store.update({
-        _id: 'restart',
-        value: false,
-      }, true).then(() => {
-        window.location.reload();
-      });
+      // store.store
+      //   .update(
+      //     {
+      //       _id: "restart",
+      //       value: false
+      //     },
+      //     true
+      //   )
+      //   .then(() => {
+      //     window.location.reload();
+      //   });
+      window.location.reload();
     }
 
     // If a hashtag is set, split tweet stream into left and right
@@ -109,13 +115,18 @@ export default class StockView extends React.Component {
           stockExchange={stockExchange}
           currency={currency}
           minimizeChart={minimizeChart}
-          registerQuickUpdate={(callback) => { this.quickUpdateRight = callback; }}
-          registerReset={(callback) => { this.resetRight = callback; }}
+          registerQuickUpdate={callback => {
+            this.quickUpdateRight = callback;
+          }}
+          registerReset={callback => {
+            this.resetRight = callback;
+          }}
           hashTag={hashTag}
           requestNextTweet={this.onNextTweetRequested}
           sentiment={sentiment}
           setView={this.props.setView}
           curViewIndex={this.props.curViewIndex}
+          showTicks={this.props.showTicks}
         />
       </div>
     );
@@ -126,9 +137,11 @@ StockView.propTypes = {
   style: PropTypes.object,
   curViewIndex: PropTypes.number.isRequired,
   setView: PropTypes.func,
+  showTicks: PropTypes.bool
 };
 
 StockView.defaultProps = {
   style: {},
   setView: () => {},
+  showTicks: true
 };

@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Stock from './stock/stock';
-import './right.css';
+import React from "react";
+import PropTypes from "prop-types";
+import Stock from "./stock/stock";
+import "./right.css";
 // import TweetList from '../tweet-list/tweet-list';
 
 /**
@@ -18,7 +18,7 @@ export default class Right extends React.Component {
       companyInfo,
       stockStartingPrice,
       stockExchange,
-      currency,
+      currency
     } = this.props;
 
     return (
@@ -32,6 +32,7 @@ export default class Right extends React.Component {
           currency={currency}
           setView={this.props.setView}
           curViewIndex={this.props.curViewIndex}
+          showTicks={this.props.showTicks}
         />
       </section>
     );
@@ -47,6 +48,7 @@ Right.propTypes = {
   currency: PropTypes.string,
   curViewIndex: PropTypes.number,
   setView: PropTypes.func,
+  showTicks: PropTypes.bool
 };
 
 Right.defaultProps = {
@@ -54,8 +56,9 @@ Right.defaultProps = {
   stockModifier: 0,
   companyInfo: {},
   stockStartingPrice: 10,
-  stockExchange: 'NYSE',
-  currency: '$',
+  stockExchange: "NYSE",
+  currency: "$",
   curViewIndex: 1,
-  setView: () => {},
+  showTicks: true,
+  setView: () => {}
 };

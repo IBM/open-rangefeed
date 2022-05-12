@@ -1,16 +1,16 @@
-import React from 'react';
-import store from 'react-couchdb-store';
-import 'core-js/es/array';
-import TweetView from './tweetview';
-import StockView from './stockview';
-import SplitView from './splitview';
-import MultiStockView from './multistockview';
-import dbSchema from '../db-schema-main';
+import React from "react";
+import store from "react-couchdb-store";
+import "core-js/es/array";
+import TweetView from "./tweetview";
+import StockView from "./stockview";
+import SplitView from "./splitview";
+import MultiStockView from "./multistockview";
+import dbSchema from "../db-schema-main";
 
 export default class ViewSwitcher extends React.Component {
   constructor() {
     super();
-    this.state = { curViewIndex: 1 }; // Default is stock view
+    this.state = { curViewIndex: 1, showTicks: true }; // Default is stock view
     this.setView = this.setView.bind(this);
 
     const { storeUtil } = store;
@@ -22,12 +22,12 @@ export default class ViewSwitcher extends React.Component {
     storeUtil.createDefaultStates(this.state);
 
     // Reads data from database
-    storeUtil.loadState((newState) => {
+    storeUtil.loadState(newState => {
       this.setState(newState);
     });
 
     // Get notified when database value changes
-    storeUtil.registerEventListeners((newState/* , quickUpdate */) => {
+    storeUtil.registerEventListeners((newState /* , quickUpdate */) => {
       if (this._isMounted === true) {
         this.setState(newState);
       }
@@ -47,9 +47,9 @@ export default class ViewSwitcher extends React.Component {
   }
 
   render() {
-    const { curViewIndex } = this.state;
-    const showStyles = { visibility: 'visible', height: '100%' };
-    const hideStyles = { visibility: 'hidden', height: '0px' };
+    const { curViewIndex, showTicks } = this.state;
+    const showStyles = { visibility: "visible", height: "100%" };
+    const hideStyles = { visibility: "hidden", height: "0px" };
 
     const stock_style = curViewIndex === 1 ? showStyles : hideStyles;
     const tweet_style = curViewIndex === 2 ? showStyles : hideStyles;
@@ -59,18 +59,25 @@ export default class ViewSwitcher extends React.Component {
     return (
       <>
         <div style={stock_style}>
-          <StockView curViewIndex={curViewIndex} setView={this.setView} />
+          <StockView
+            curViewIndex={curViewIndex}
+            setView={this.setView}
+            showTicks={showTicks}
+          />
         </div>
         <div style={tweet_style}>
           <TweetView curViewIndex={curViewIndex} setView={this.setView} />
         </div>
         <div style={split_style}>
-          <SplitView curViewIndex={curViewIndex} setView={this.setView} />
+          <SplitView
+            curViewIndex={curViewIndex}
+            setView={this.setView}
+            showTicks={showTicks}
+          />
         </div>
         <div style={multi_style}>
           <MultiStockView curViewIndex={curViewIndex} setView={this.setView} />
         </div>
-
       </>
     );
   }
