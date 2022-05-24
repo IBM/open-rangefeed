@@ -208,18 +208,18 @@ export default class TweetView extends React.Component {
 
     // Restarts the app
     if (restart === true) {
-      // store.store
-      //   .update(
-      //     {
-      //       _id: "restart",
-      //       value: false
-      //     },
-      //     true
-      //   )
-      //   .then(() => {
-      //     window.location.reload();
-      //   });
-      window.location.reload();
+      store.store
+        .update(
+          {
+            _id: "restart",
+            value: false
+          },
+          true
+        )
+        .then(() => {
+          window.location.reload();
+        });
+      // window.location.reload();
     }
 
     // If a hashtag is set, split tweet stream into left and right
